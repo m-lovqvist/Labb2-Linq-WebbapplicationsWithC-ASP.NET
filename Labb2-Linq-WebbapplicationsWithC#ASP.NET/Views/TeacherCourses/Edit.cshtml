@@ -1,0 +1,54 @@
+﻿@model Labb2_Linq_WebbapplicationsWithC_ASP.NET.Models.TeacherCourse
+
+@{
+    ViewData["Title"] = "Assign course to teacher";
+}
+
+<h1 class="mb-4">Assign course to teacher</h1>
+
+<div class="row justify-content-start">
+    <div class="col-md-6">
+        <h4>Current information</h4>
+        <hr />
+        <h6>Teacher: </h6><h6 class="text-black-50">@Html.DisplayFor(model => model.Teacher.TeacherFirstName) @Html.DisplayFor(model => model.Teacher.TeacherLastName)</h6>
+        <h6>Course: </h6><h6 class="text-black-50">@Html.DisplayFor(model => model.Course.CourseName)</h6>
+        <h4 class="mt-5">Update information</h4>
+        <hr />
+        <form asp-action="Edit" class="mt-4">
+
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+            <input type="hidden" name="teacherId" value="@Model.TeacherId" />
+
+            <div class="mb-3">
+                <label asp-for="NewTeacherId" class="form-label">Teacher</label>
+                <select asp-for="NewTeacherId" class="form-control" asp-items="ViewBag.TeacherId"></select>
+                <span asp-validation-for="NewTeacherId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="CourseId" class="form-label" >Course</label>
+                <select asp-for="CourseId" class="form-control" asp-items="ViewBag.CourseId" disabled></select>
+                <span asp-validation-for="CourseId" class="text-danger"></span>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                <input type="submit" value="Submit" class="btn btn-outline-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="mt-5">
+    <a class="text-decoration-none text-black-50" asp-area="" asp-controller="Courses" asp-action="Index">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5" />
+        </svg>
+        Back
+    </a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
